@@ -1,1 +1,1 @@
-here's the site https://open-ai-api-test-ten.vercel.app/
+here's the site https://patrick-batman-owo.vercel.app/
