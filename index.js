@@ -37,7 +37,7 @@ app.post('/sendMessage', upload.none(), async (req, res) => {
         <title>Response</title>
       </head>
       <body>
-      <h2>AI Response</h2>
+      <h2>Response</h2>
         <p>${responseText}</p>
         <br>
         <a href="/">Back</a>
