@@ -1,4 +1,4 @@
-import openai from './oai.js';
+import openai from './api/oai.js';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import express from 'express';
