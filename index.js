@@ -3,8 +3,12 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import express from 'express';
 
+
 const app = express();
 const HTTP_PORT = 1234;
+
+app.set('views', __dirname + '/views');
+
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -29,7 +33,7 @@ app.use(express.urlencoded({ extended: true }));
           <br>
 
           <a href="/">Back</a>
-          
+
         </body></html>
         `);
       } catch (err) {
