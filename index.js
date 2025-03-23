@@ -7,6 +7,9 @@ import express from 'express';
 const app = express();
 const HTTP_PORT = 1234;
 
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 app.set('views', __dirname + '/views');
 
 
@@ -43,8 +46,6 @@ app.use(express.urlencoded({ extended: true }));
   });
 
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/views/index.html'))
 });
