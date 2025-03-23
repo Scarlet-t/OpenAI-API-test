@@ -13,12 +13,15 @@
     <div class="container text-left">
         <div class="row">
             <div class="col">
-                <form method="post" action="/sendMessage">
+                <form method="post" action="/sendMessage" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="userInput" class="form-label">User Input</label>
-                        <input id="userInput" name="userInput" type="text" class="form-control">
+                        <input name="userInput" type="text" class="form-control">
                     </div>
-
+                    <div class="mb-3 form-check">
+                        <input name="patrickBatman" id="patrickBatman" type="checkbox" class="form-check-input" value="yes">
+                        <label class="form-check-label" for="patrickBatman">(seeecret)</label>
+                    </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>

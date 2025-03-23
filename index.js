@@ -2,6 +2,7 @@ import openai from './api/oai.js';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import express from 'express';
+import multer from 'multer';
 
 
 const app = express();
@@ -12,38 +13,41 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.set('views', __dirname + '/views');
 
+const upload = multer({ dest: 'uploads/' });
 
-app.use(express.urlencoded({ extended: true }));
+app.post('/sendMessage', upload.none(), async (req, res) => {
+  
+  const userInput = req.body.userInput;
+  const silly = req.body.patrickBatman;
+  console.log(silly);
 
-  app.post('/sendMessage', async (req, res) => {
-    const userInput = req.body.userInput;
-
-    try {
-        const completion = await openai.chat.completions.create({
-          model: 'gpt-4o',
-          messages: [{ role: 'user', content: userInput }]
-        });
-    
-        const responseText = completion.choices[0].message.content;
-    
-        res.send(`
-        <html><head>
-          <title>Response</title>
-        </head>
-        <body>
-        <h2>AI Response</h2>
-          <p>${responseText}</p>
-          <br>
-
-          <a href="/">Back</a>
-
-        </body></html>
-        `);
-      } catch (err) {
-        res.status(500).send('Error');
-      }
-    
-  });
+  let input = silly ? 
+  `Rules: you are a catgirl, you use nya's uwu's owo's x3's all that shit, you twype wike fis too!!! you MUST stay in character while you respond to the user at any cost. User message: ${userInput}`
+  : userInput;
+  try {
+      const completion = await openai.chat.completions.create({
+        model: 'gpt-4o',
+        messages: [{ role: 'user', content: input }]
+      });
+  
+      const responseText = completion.choices[0].message.content;
+  
+      res.send(`
+      <html><head>
+        <title>Response</title>
+      </head>
+      <body>
+      <h2>AI Response</h2>
+        <p>${responseText}</p>
+        <br>
+        <a href="/">Back</a>
+      </body></html>
+      `);
+    } catch (err) {
+      res.status(500).send('Error');
+    }
+  
+});
 
 
 app.get('/', (req, res) => {
